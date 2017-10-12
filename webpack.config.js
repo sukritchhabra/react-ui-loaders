@@ -1,46 +1,36 @@
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractPlugin = new ExtractTextPlugin({
-    filename: 'main.css'
-});
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+const CopyWebpackPlugin = require('copy-webpack-plugin'); // Copy assets to /dist
 
 module.exports = {
-    entry: [
-        './src/index.jsx'
-    ],
+    entry: {
+        app: './src/index.js'
+    },
+
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        publicPath: '/dist',
-        filename: 'bundle.js'
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist')
     },
+
     module: {
-        rules: [
-            {
-                test: /\.jsx$/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['react', 'es2015', 'stage-2']
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.scss$/,
-                use: extractPlugin.extract({
-                    use: ['css-loader', 'sass-loader']
-                })
-            }
-        ]
+      rules: [
+        {
+          test: /\.css$/,
+          use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: "css-loader"
+          })
+        }
+      ]
     },
-    plugins: [extractPlugin],
-    resolve: {
-        extensions: ['.js', '.jsx', '.scss']
-    },
-    devServer: {
-        historyApiFallback: true,
-        contentBase: './',
-        inline: false
-    }
+
+    plugins: [
+        new CleanWebpackPlugin(['dist']),
+        new CopyWebpackPlugin([ {from:'./src/assets/images',to:'assets/images'} ]),
+        new HtmlWebpackPlugin({ title: 'Output Management' }),
+        new ExtractTextPlugin("styles.css"),
+    ]
 };
