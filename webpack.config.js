@@ -7,7 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin'); // Copy assets to /dis
 
 module.exports = {
     entry: {
-        app: './src/index.js'
+        app: './src/index.jsx'
     },
 
     output: {
@@ -18,6 +18,17 @@ module.exports = {
     module: {
       rules: [
         {
+          test: /\.jsx$/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                  presets: ['react', 'es2015', 'stage-2']
+              }
+            }
+          ]
+        },
+        {
           test: /\.css$/,
           use: ExtractTextPlugin.extract({
             fallback: "style-loader",
@@ -25,6 +36,10 @@ module.exports = {
           })
         }
       ]
+    },
+
+    resolve: {
+      extensions: ['.js', '.jsx']
     },
 
     devServer: {
@@ -35,7 +50,11 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new CopyWebpackPlugin([ {from:'./src/assets/images',to:'assets/images'} ]),
-        new HtmlWebpackPlugin({ title: 'Output Management' }),
+        new HtmlWebpackPlugin({
+          title: 'Output Management',
+          template: require('html-webpack-template'),
+          appMountId: 'content'
+        }),
         new ExtractTextPlugin("styles.css"),
     ]
 };
