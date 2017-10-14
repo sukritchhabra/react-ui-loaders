@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // Copy assets to /dist
 
@@ -44,7 +45,8 @@ module.exports = {
 
     devServer: {
       contentBase: './dist',
-      historyApiFallback: true
+      historyApiFallback: true,
+      hot: true
     },
 
     plugins: [
@@ -56,5 +58,6 @@ module.exports = {
           appMountId: 'content'
         }),
         new ExtractTextPlugin("styles.css"),
+        new webpack.HotModuleReplacementPlugin()
     ]
 };
