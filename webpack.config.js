@@ -52,6 +52,7 @@ module.exports = {
         new CopyWebpackPlugin([ {from:'./src/assets/images',to:'assets/images'} ]),
         new HtmlWebpackPlugin({
           title: 'Output Management',
+          inject: false,
           template: require('html-webpack-template'),
           appMountId: 'content'
         }),
