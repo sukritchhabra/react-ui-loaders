@@ -7,12 +7,13 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // Copy assets to /dist
 
 module.exports = {
-    entry: {
-        app: './src/index.jsx'
-    },
+    entry: [
+      'react-hot-loader/patch',
+      './src/index.jsx'
+    ],
 
     output: {
-        filename: '[name].bundle.js',
+        filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
 
@@ -22,10 +23,7 @@ module.exports = {
           test: /\.jsx$/,
           use: [
             {
-              loader: 'babel-loader',
-              options: {
-                  presets: ['react', 'es2015', 'stage-2']
-              }
+              loader: 'babel-loader'
             }
           ]
         },
@@ -58,6 +56,7 @@ module.exports = {
           appMountId: 'content'
         }),
         new ExtractTextPlugin("styles.css"),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin()
     ]
 };
