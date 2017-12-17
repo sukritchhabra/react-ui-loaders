@@ -1,4 +1,4 @@
-import { Sum } from '../src/components/Header/Header.jsx';
+import { Sum } from '../src/components/Header.jsx';
 
 describe('Testing Sum', () => {
     test('Expect 1 + 3 to be 4', () => {
