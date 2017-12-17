@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 
-import Header from './Header/Header';
+import Header from 'components/Header';
 
 class App extends Component {
     render() {
