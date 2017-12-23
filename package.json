@@ -1,8 +1,8 @@
 {
-  "name": "ReactTemplate",
+  "name": "react-ui-loading",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack",
@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sukritchhabra/ReactTemplate.git"
+    "url": "git+https://github.com/sukritchhabra/react-ui-loading.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sukritchhabra/ReactTemplate/issues"
+    "url": "https://github.com/sukritchhabra/react-ui-loading/issues"
   },
-  "homepage": "https://github.com/sukritchhabra/ReactTemplate#readme",
+  "homepage": "https://github.com/sukritchhabra/react-ui-loading#readme",
   "dependencies": {
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
