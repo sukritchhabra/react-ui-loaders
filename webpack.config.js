@@ -7,13 +7,15 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // Copy assets to /dist
 
 module.exports = {
-    entry: [
-      'react-hot-loader/patch',
-      './src/index.jsx'
-    ],
+    entry: {
+      app: [
+        'react-hot-loader/patch',
+        './src/index.jsx'
+      ],
+    },
 
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/'
     },
@@ -58,6 +60,7 @@ module.exports = {
         new HtmlWebpackPlugin({
           title: 'Output Management',
           inject: false,
+          chunks: ['app'],
           template: require('html-webpack-template'),
           appMountId: 'content'
         }),
