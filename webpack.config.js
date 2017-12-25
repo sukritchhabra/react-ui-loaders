@@ -37,6 +37,27 @@ module.exports = {
             fallback: "style-loader",
             use: ["css-loader", "sass-loader"]
           }))
+        },
+        {
+          test: /\.(png|jpe?g|svg)$/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 8000,
+                name: 'images/[hash]-[name].[ext]'
+              }
+            },
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                webp: {
+                  quality: 60,
+                  lossless: true,
+                }
+              },
+            }
+          ]
         }
       ]
     },
