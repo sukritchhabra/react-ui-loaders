@@ -42,6 +42,27 @@ module.exports = {
             fallback: "style-loader",
             use: ["css-loader", "sass-loader"]
           }))
+        },
+        {
+          test: /\.(png|jpe?g|svg)$/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 8000,
+                name: 'images/[hash]-[name].[ext]'
+              }
+            },
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                webp: {
+                  quality: 60,
+                  lossless: true,
+                }
+              },
+            }
+          ]
         }
       ]
     },
@@ -50,6 +71,7 @@ module.exports = {
       alias: {
         components: path.resolve(__dirname, 'src/components'),
         styles: path.resolve(__dirname, 'src/components/styles'),
+        images: path.resolve(__dirname, 'src/assets/images'),
       },
       extensions: ['.js', '.jsx']
     },
